@@ -29,7 +29,6 @@ public class fisher {
     static RGB BOBBER_COLOR = new RGB(255, 180, 31);
 
     static boolean fishing = false; 
-    static boolean windowActivated = false; 
 
     static Robot bot;
 
@@ -112,7 +111,7 @@ public class fisher {
             updateGUIThread.start();
 
             // fishing logic
-            windowActivated = false;
+            boolean windowActivated = false;
             while (true) {
                 Thread.sleep(50);
 
@@ -243,7 +242,8 @@ public class fisher {
 
                     if (bobberCoords.x == -1 && bobberCoords.y == -1 && initialBobberPosition.x != -1 && initialBobberPosition.y != -1) {
                         // the game has been finished
-                        Thread.sleep(8000);
+                        bot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+                        Thread.sleep(6000);
                         break;
                     }
 
