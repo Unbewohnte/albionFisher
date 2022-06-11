@@ -25,7 +25,6 @@ import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 
 
-
 public class fisher {
     static RGB BOBBER_COLOR = new RGB(255, 180, 31);
 
@@ -225,16 +224,19 @@ public class fisher {
                     Point bobberCoords = imgutils.getPixelCoordinates(screenshot, BOBBER_COLOR);
                     if (bobberCoords.x != -1 && bobberCoords.y != -1) {
                         // found one !
-                        System.out.println(String.format("found bobber: %d %d", bobberCoords.x, bobberCoords.y));
                         if (initialBobberPosition.x == -1 && initialBobberPosition.y == -1) {
                             // it's the first time
                             initialBobberPosition = bobberCoords;
                             continue;
                         }
-                        // play the game 
+
                         if (bobberCoords.x < initialBobberPosition.x) {
+                            // hold
                             bot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
-                            bot.delay(1400);
+                        }
+
+                        if (bobberCoords.x > initialBobberPosition.x) {
+                            // release
                             bot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
                         }
                     }
@@ -245,7 +247,7 @@ public class fisher {
                         break;
                     }
 
-                    Thread.sleep(25);
+                    Thread.sleep(5);
                 }
             }
         } catch (Exception e) {
