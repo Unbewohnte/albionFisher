@@ -1,10 +1,15 @@
 src_dir:='src/xyz/unbewohnte/albionFisher'
 release_dir:='release'
+jar_name:='albionFisher.jar'
+
+jar: all
+	jar cvmf MANIFEST.txt $(jar_name) *.class && rm *.class
 
 all:
-	javac -Werror $(src_dir)/*.java && cp $(src_dir)/*.class . && rm $(src_dir)/*.class
-	mkdir -p $(release_dir)
-	mv *.class $(release_dir)
+	javac -Werror $(src_dir)/*.java && mv $(src_dir)/*.class .
 
-# jar: all
-# 	jar cvfm fisher.jar Manifest.txt gui.class fisher.class bobber.png
+release: jar
+	mkdir -p $(release_dir)
+	mv $(jar_name) $(release_dir)
+	cp COPYING $(release_dir)
+	cp README.md $(release_dir)

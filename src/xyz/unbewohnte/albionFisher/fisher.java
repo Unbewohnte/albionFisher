@@ -26,6 +26,8 @@ import javax.swing.ImageIcon;
 
 
 public class fisher {
+    static String VERSION = "v0.1.2";
+
     static RGB BOBBER_COLOR = new RGB(255, 180, 31);
 
     static boolean fishing = false; 
@@ -99,7 +101,7 @@ public class fisher {
             bot = new Robot();
 
             // GUI
-            gui.launchGUI("fisher");
+            gui.launchGUI("fisher", VERSION);
 
             // update gui in the separate thread
             Thread updateGUIThread = new Thread() {
@@ -189,7 +191,6 @@ public class fisher {
                     // check if severe changes has occured in the image
                     if (meanDifference > meanDiffThreshold) {
                         // catch !
-                        System.out.println("catch !");
                         bot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
                         bot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
                         break; // break out of loop still fishing so the next stage starts

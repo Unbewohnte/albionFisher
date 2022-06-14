@@ -39,7 +39,7 @@ public class gui {
     static JLabel meanDifferenceValueLabel;
     static JLabel capturedImageLabel;
 
-    public static void launchGUI(String windowName) {
+    public static void launchGUI(String windowName, String version) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
@@ -156,9 +156,15 @@ public class gui {
                 mousePositionLabel.setBounds(190, 230, 100, 30);
                 window.add(mousePositionLabel);
 
+                // version label
+                JLabel versionLabel = new JLabel(version);
+                versionLabel.setBounds(290, 230, 40, 30);
+                window.add(versionLabel);
+
                 // copyright
                 JLabel copyrightLabel = new JLabel("(c) Kasyanov N. A.");
-                copyrightLabel.setBounds(320, 230, 150, 30);
+                // copyrightLabel.setBounds(290, 230, 110, 30);
+                copyrightLabel.setBounds(335, 230, 110, 30);
                 window.add(copyrightLabel);
 
                 // show window
