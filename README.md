@@ -1,7 +1,7 @@
 # albionFisher - albion online fisher bot
 
 # Compiling
-`make jar` if you're on GNU/Linux, else - `javac src/xyz/unbewohnte/albionFisher/*.java`
+`make jar` if you're on GNU/Linux, else - `javac src/xyz/unbewohnte/albionFisher/*.java`+`jar cvmf MANIFEST.txt albionFisher.jar *.class && rm *.class`
 
 # Launch
 `java -jar albionFisher.jar`
