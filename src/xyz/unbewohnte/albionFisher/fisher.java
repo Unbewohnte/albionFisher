@@ -26,7 +26,7 @@ import javax.swing.ImageIcon;
 
 
 public class fisher {
-    static String VERSION = "v0.1.2";
+    static String VERSION = "v0.1.3";
 
     static RGB BOBBER_COLOR = new RGB(255, 180, 31);
 
@@ -114,6 +114,9 @@ public class fisher {
 
             // fishing logic
             boolean windowActivated = false;
+            boolean needToRecast = false;
+            int idleCountMsMax = 20000; // 20 seconds
+            int idleCountMs = 0;
             while (true) {
                 Thread.sleep(50);
 
@@ -167,7 +170,15 @@ public class fisher {
                 Thread.sleep(3500);
 
                 // wait for fish as long as the user does not move the mouse
+                idleCountMs = 0;
+                needToRecast = false;
                 while (true) {
+                    if (idleCountMs >= idleCountMsMax) {
+                        // something must be wrong
+                        needToRecast = true;
+                        break;
+                    }
+
                     if (mousePos_x != xpos && mousePos_y != ypos) {
                         fishing = false;
                         break; // break out of loop with fishing flag set to FALSE
@@ -197,12 +208,13 @@ public class fisher {
                     }
 
                     Thread.sleep(50);
+                    idleCountMs += 50;
                 }
 
                 // play minigame if still fishing
                 lastMean = 0.0f;
                 currentMean = 0.0f;
-                if (!fishing) {
+                if (!fishing || needToRecast) {
                     continue;
                 };
 
