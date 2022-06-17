@@ -26,7 +26,7 @@ import javax.swing.ImageIcon;
 
 
 public class fisher {
-    static String VERSION = "v0.1.3";
+    static String VERSION = "v0.1.4";
 
     static RGB BOBBER_COLOR = new RGB(255, 180, 31);
 
@@ -115,7 +115,7 @@ public class fisher {
             // fishing logic
             boolean windowActivated = false;
             boolean needToRecast = false;
-            int idleCountMsMax = 20000; // 20 seconds
+            int idleCountMsMax = 35000; // 35 seconds
             int idleCountMs = 0;
             while (true) {
                 Thread.sleep(50);
@@ -142,22 +142,21 @@ public class fisher {
                 holdms = gui.holdMsSlider.getValue();
                 meanDiffThreshold = gui.meanDiffThresholdSlider.getValue();
 
-                
-                Thread.sleep(500);
-
                 // activate window if needed
                 if (!windowActivated) {
-                    windowActivated = true;
+                    bot.delay(100);
+                    
                     bot.mouseMove(xpos, ypos);
                     bot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
-                    bot.delay(50);
+                    bot.delay(25);
                     bot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+                    windowActivated = true;
                 }
 
                 // move the mouse to the position
 
                 // give the game window needed vector
-                bot.delay(300);
+                bot.delay(250);
                 bot.mouseMove(xpos-5, ypos-5);
                 bot.mouseMove(xpos, ypos);
 
@@ -256,11 +255,9 @@ public class fisher {
                     if (bobberCoords.x == -1 && bobberCoords.y == -1 && initialBobberPosition.x != -1 && initialBobberPosition.y != -1) {
                         // the game has been finished
                         bot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
-                        Thread.sleep(6000);
+                        Thread.sleep(5000);
                         break;
                     }
-
-                    Thread.sleep(5);
                 }
             }
         } catch (Exception e) {

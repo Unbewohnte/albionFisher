@@ -116,11 +116,10 @@ public class gui {
                 thresholdSliderLabel.setBounds(20, 135, 130, 20);
                 window.add(thresholdSliderLabel);
 
-
-                meanDiffThresholdSlider = new JSlider(JSlider.HORIZONTAL, 0, 30, 10);
-                meanDiffThresholdSlider.setValue(10);
-                meanDiffThresholdSlider.setMajorTickSpacing(10);
-                meanDiffThresholdSlider.setMinorTickSpacing(5);
+                meanDiffThresholdSlider = new JSlider(JSlider.HORIZONTAL, 0, 10, 5);
+                meanDiffThresholdSlider.setValue(3);
+                meanDiffThresholdSlider.setMajorTickSpacing(5);
+                meanDiffThresholdSlider.setMinorTickSpacing(1);
                 meanDiffThresholdSlider.setPaintTicks(true);
                 meanDiffThresholdSlider.setPaintLabels(true);
                 meanDiffThresholdSlider.setBounds(150, 135, 170, 45);
@@ -163,7 +162,6 @@ public class gui {
 
                 // copyright
                 JLabel copyrightLabel = new JLabel("(c) Kasyanov N. A.");
-                // copyrightLabel.setBounds(290, 230, 110, 30);
                 copyrightLabel.setBounds(335, 230, 110, 30);
                 window.add(copyrightLabel);
 
