@@ -26,7 +26,7 @@ import javax.swing.ImageIcon;
 
 
 public class fisher {
-    static String VERSION = "v0.1.4";
+    static String VERSION = "v0.1.5";
 
     static RGB BOBBER_COLOR = new RGB(255, 180, 31);
 
