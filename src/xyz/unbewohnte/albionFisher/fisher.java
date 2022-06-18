@@ -114,7 +114,6 @@ public class fisher {
 
             // fishing logic
             boolean windowActivated = false;
-            boolean needToRecast = false;
             int idleCountMsMax = 35000; // 35 seconds
             int idleCountMs = 0;
             while (true) {
@@ -122,6 +121,7 @@ public class fisher {
 
                 if (!fishing) {
                     windowActivated = false;
+                    idleCountMs = 0;
                     continue;
                 }
 
@@ -170,11 +170,9 @@ public class fisher {
 
                 // wait for fish as long as the user does not move the mouse
                 idleCountMs = 0;
-                needToRecast = false;
                 while (true) {
                     if (idleCountMs >= idleCountMsMax) {
                         // something must be wrong
-                        needToRecast = true;
                         break;
                     }
 
@@ -213,7 +211,8 @@ public class fisher {
                 // play minigame if still fishing
                 lastMean = 0.0f;
                 currentMean = 0.0f;
-                if (!fishing || needToRecast) {
+                if (!fishing || idleCountMs >= idleCountMsMax) {
+                    idleCountMs = 0;
                     continue;
                 };
 
