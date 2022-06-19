@@ -102,7 +102,7 @@ public class gui {
                 holdSliderLabel.setBounds(20, 90, 70, 20);
                 window.add(holdSliderLabel);
 
-                holdMsSlider = new JSlider(JSlider.HORIZONTAL, 0, 1500, 250);
+                holdMsSlider = new JSlider(JSlider.HORIZONTAL, 0, 1100, 250);
                 holdMsSlider.setValue(250);
                 holdMsSlider.setMajorTickSpacing(500);
                 holdMsSlider.setMinorTickSpacing(250);

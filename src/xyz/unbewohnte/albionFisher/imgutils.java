@@ -33,7 +33,7 @@ public class imgutils {
         return sum / (img.getWidth() * img.getHeight());
     }
 
-    public static Point getPixelCoordinates(BufferedImage img, RGB color) {
+    public static Point getPixelCoordinates(BufferedImage img, rgb color) {
         for (int y = 0; y < img.getHeight(); y++) {
             for (int x = 0; x < img.getWidth(); x++) {
                 int imgColor = img.getRGB(x, y);

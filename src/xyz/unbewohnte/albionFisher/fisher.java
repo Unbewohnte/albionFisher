@@ -26,9 +26,9 @@ import javax.swing.ImageIcon;
 
 
 public class fisher {
-    static String VERSION = "v0.1.5";
+    static String VERSION = "v0.1.6";
 
-    static RGB BOBBER_COLOR = new RGB(255, 180, 31);
+    static rgb BOBBER_COLOR = new rgb(255, 180, 31);
 
     static boolean fishing = false; 
 
@@ -101,7 +101,7 @@ public class fisher {
             bot = new Robot();
 
             // GUI
-            gui.launchGUI("fisher", VERSION);
+            gui.launchGUI("albionFisher", VERSION);
 
             // update gui in the separate thread
             Thread updateGUIThread = new Thread() {
@@ -114,14 +114,11 @@ public class fisher {
 
             // fishing logic
             boolean windowActivated = false;
-            int idleCountMsMax = 35000; // 35 seconds
-            int idleCountMs = 0;
             while (true) {
                 Thread.sleep(50);
 
                 if (!fishing) {
                     windowActivated = false;
-                    idleCountMs = 0;
                     continue;
                 }
 
@@ -169,13 +166,7 @@ public class fisher {
                 Thread.sleep(3500);
 
                 // wait for fish as long as the user does not move the mouse
-                idleCountMs = 0;
                 while (true) {
-                    if (idleCountMs >= idleCountMsMax) {
-                        // something must be wrong
-                        break;
-                    }
-
                     if (mousePos_x != xpos && mousePos_y != ypos) {
                         fishing = false;
                         break; // break out of loop with fishing flag set to FALSE
@@ -205,14 +196,12 @@ public class fisher {
                     }
 
                     Thread.sleep(50);
-                    idleCountMs += 50;
                 }
 
                 // play minigame if still fishing
                 lastMean = 0.0f;
                 currentMean = 0.0f;
-                if (!fishing || idleCountMs >= idleCountMsMax) {
-                    idleCountMs = 0;
+                if (!fishing) {
                     continue;
                 };
 
@@ -254,6 +243,18 @@ public class fisher {
                     if (bobberCoords.x == -1 && bobberCoords.y == -1 && initialBobberPosition.x != -1 && initialBobberPosition.y != -1) {
                         // the game has been finished
                         bot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+                        Thread.sleep(5000);
+                        
+                        if (mousePos_x != xpos && mousePos_y != ypos) {
+                            fishing = false;
+                        }
+                        
+                        break;
+                    }
+
+                    if (bobberCoords.x == -1 && bobberCoords.y == -1 && initialBobberPosition.x == -1 && initialBobberPosition.y == -1) {
+                        // false-positive !
+                        // recast
                         Thread.sleep(5000);
                         break;
                     }
